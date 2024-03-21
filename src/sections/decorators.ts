@@ -48,6 +48,21 @@ function customisedLoggedMethod(headMessage = "LOG:") {
   }
 }
 
+function wellTypedDecorators<This, Args extends any[], Return>(
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+) {
+  const methodName = String(context.name)
+
+  function replacementMethod(this: This, ...args: Args): Return {
+    console.log(`LOG: Entering method ${methodName}`)
+    const result = target.call(this, ...args)
+    console.log(`LOG: Exiting method ${methodName}`)
+
+    return result
+  }
+  return replacementMethod
+}
 
 function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
   const methodName = String(context.name)
@@ -56,7 +71,7 @@ function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
     throw new Error(`"bound" can not decorate private properties like ${methodName}`)
   }
 
-  context.addInitializer(function() {
+  context.addInitializer(function() { // It’s a way to hook into the beginning of the constructor (or the initialization of the class itself if we’re working with statics).
     this[methodName] = this[methodName].bind(this)
   })
 }
