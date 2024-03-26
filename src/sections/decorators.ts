@@ -64,17 +64,17 @@ function wellTypedDecorators<This, Args extends any[], Return>(
   return replacementMethod
 }
 
-function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
-  const methodName = String(context.name)
+// function bound(originalMethod: any, context: ClassMethodDecoratorContext) {
+//   const methodName = String(context.name)
 
-  if (context.private) {
-    throw new Error(`"bound" can not decorate private properties like ${methodName}`)
-  }
+//   if (context.private) {
+//     throw new Error(`"bound" can not decorate private properties like ${methodName}`)
+//   }
 
-  context.addInitializer(function() { // It’s a way to hook into the beginning of the constructor (or the initialization of the class itself if we’re working with statics).
-    this[methodName] = this[methodName].bind(this)
-  })
-}
+//   context.addInitializer(function () { // It’s a way to hook into the beginning of the constructor (or the initialization of the class itself if we’re working with statics).
+//     this[methodName] = this[methodName].bind(this)
+//   })
+// }
 
 export class OldPerson {
   name: string
@@ -98,8 +98,8 @@ export class NewPerson {
   }
 
   //@loggedMethod
-  @bound  // bind(this) can be replaced with this
-  //  @workingLoggedMethod
+  // @bound  // bind(this) can be replaced with this
+  @workingLoggedMethod
   @customisedLoggedMethod("LOG THIS THIS:")
   greet() { // use arrow function to decalre it as a property initialised
     console.log(`Hiiii ${this.name}`)
