@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"
@@ -11,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --trace-warnings --loader ts-node/esm/transpile-only src/main.ts",
     "start": "node build/main.js",
-    "build": "tsc"
+    "build": "tsc --outDir build"
   },
   "type": "module",
   "author": "",

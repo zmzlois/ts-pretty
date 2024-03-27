@@ -13,13 +13,13 @@ class Person {
     }
 
 
-    @replaceMethod
+    @replaceMethod()
     hello() { // (B)
         return `Hi ${this.name}!`;
     }
 }
 
 const robin = new Person('Robin');
-assert.strictEqual(
+assert.equal(
     robin.hello(), 'How are you, Robin?'
 );
