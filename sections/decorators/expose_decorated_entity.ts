@@ -4,7 +4,7 @@ function exposeAccess(_value, { access }) {
 }
 
 class Color {
-    @exposeAccess
+    @exposeAccess()
     name = "green";
 }
 
